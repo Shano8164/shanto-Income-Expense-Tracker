@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Income & Expense Tracker</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></scamountInput<!-- jsPDF & AutoTable Library for PDF Download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-8">
+
+  <div class="max-w-4xl mx-auto space-y-6">
+    
+    <!-- Header -->
+    <header class="text-center py-4">
+      <h1 class="text-3xl font-bold text-white">Daily Income & Expense Tracker</h1>
+      <p class="text-slate-300 mt-2 font-medium">You can easily keep track of your income and expenses using the app created by Shanto Khan.</p>
+    </header>
+
+    <!-- Dashboard Summary -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 shadow-sm">
+        <p class="text-sm font-medium text-slate-400">Total Income</p>
+        <h2 id="total-income" class="text-2xl font-bold text-emerald-400 mt-1">$0.00</h2>
+      </div>
+
+      <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 shadow-sm">
+        <p class="text-sm font-medium text-slate-400">Total Expense</p>
+        <h2 id="total-expense" class="text-2xl font-bold text-rose-400 mt-1">$0.00</h2>
+      </div>
+
+      <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 shadow-sm">
+        <p class="text-sm font-medium text-slate-400">Net Balance</p>
+        <h2 id="net-balance" class="text-2xl font-bold text-blue-400 mt-1">$0.00</h2>
+      </div>
+    </div>
+
+    <!-- Add Transaction Form -->
+    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md">
+      <h2 class="text-xl font-semibold mb-4 text-white">Add New Entry</h2>
+      <form id="transaction-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-300 mb-1">Title / Description</label>
+          <input type="text" id="title" placeholder="e.g., Salary, Groceries, Rent" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-300 mb-1">Amount ($)</label>
+          <input type="number" id="amount" step="0.01" placeholder="0.00" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-300 mb-1">Type</label>
+          <select id="type" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-300 mb-1">Category</label>
+          <input type="text" id="category" placeholder="e.g., General, Transport, Food" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+
+        <div class="md:col-span-2 mt-2">
+          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+            Add Transaction
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- History & Action Area -->
+    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-md">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
+        <h2 class="text-xl font-semibold text-white">Recent Transactions</h2>
+        <button id="download-pdf" class="bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-4 py-2 rounded-lg transition-colors flex items-center gap-2 text-sm">
+          📥 Download PDF Report
+        </button>
+      </div>
+
+      <!-- Transaction List -->
+      <div id="transaction-list" class="space-y-3">
+        <!-- JavaScript will render items here -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
